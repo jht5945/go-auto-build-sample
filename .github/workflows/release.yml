@@ -93,7 +93,7 @@ jobs:
       - name: Build
         run: |
           $tag = "${{ github.ref_name }}"
-          $version = [regex]::Replace($tag, 'v', '', 1)
+          $version = [regex]::Replace($tag, '^v', '', 1)
           $env:GOOS = "windows"
           $env:GOARCH = "amd64"
           $env:CGO_ENABLED = "0"
