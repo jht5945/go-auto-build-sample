@@ -13,7 +13,7 @@ LIST=(
 
 for filename in "${LIST[@]}"
 do
-    curl -L -O \
+    curl -fsSL -O \
         -H "Authorization: Bearer $GITHUB_TOKEN" \
         https://github.com/jht5945/go-auto-build-sample/releases/download/v"$VERSION"/"$filename"
     shasum -a 256 "$filename" >> SHASUMS256.txt
