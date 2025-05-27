@@ -19,7 +19,7 @@ curl -L \
   -H "X-GitHub-Api-Version: 2022-11-28" \
   https://api.github.com/repos/jht5945/go-auto-build-sample/releases/tags/"$TAG"
 
-RELEASE_ID=$(curl -fsSL \
+RELEASE_ID=$(curl -L \
   -H "Accept: application/vnd.github+json" \
   -H "Authorization: Bearer $GITHUB_TOKEN" \
   -H "X-GitHub-Api-Version: 2022-11-28" \
@@ -31,7 +31,7 @@ if [ -z "$RELEASE_ID" ]; then
 fi
 
 # 获取现有资产列表
-ASSET_ID=$(curl -fsSL \
+ASSET_ID=$(curl -L \
   -H "Accept: application/vnd.github+json" \
   -H "Authorization: Bearer $GITHUB_TOKEN" \
   -H "X-GitHub-Api-Version: 2022-11-28" \
@@ -40,7 +40,7 @@ ASSET_ID=$(curl -fsSL \
 # 如果资产已存在，删除它
 if [ -n "$ASSET_ID" ]; then
   echo "Asset already exists. Deleting asset ID $ASSET_ID"
-  curl -fsSL \
+  curl -L \
     -X DELETE \
     -H "Accept: application/vnd.github+json" \
     -H "Authorization: Bearer $GITHUB_TOKEN" \
@@ -50,7 +50,7 @@ fi
 
 printf "Uploading %s to release %s\n" "$ASSET" "$RELEASE_ID"
 
-curl -fsSL \
+curl -L \
   -X PUT \
   -H "Accept: application/vnd.github+json" \
   -H "Authorization: Bearer $GITHUB_TOKEN" \
