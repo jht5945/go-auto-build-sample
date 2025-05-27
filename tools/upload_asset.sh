@@ -13,6 +13,12 @@ else
   TYPE=application/zip
 fi
 
+curl -L \
+  -H "Accept: application/vnd.github+json" \
+  -H "Authorization: Bearer $GITHUB_TOKEN" \
+  -H "X-GitHub-Api-Version: 2022-11-28" \
+  https://api.github.com/repos/jht5945/go-auto-build-sample/releases/tags/"$TAG"
+
 RELEASE_ID=$(curl -fsSL \
   -H "Accept: application/vnd.github+json" \
   -H "Authorization: Bearer $GITHUB_TOKEN" \
