@@ -3,7 +3,7 @@
 VERSION=$1
 
 LIST=(
-    "ago-auto-build-sample-macosx-$VERSION-amd64.tgz"
+    "go-auto-build-sample-macosx-$VERSION-amd64.tgz"
     "go-auto-build-sample-macosx-$VERSION-arm64.tgz"
     "go-auto-build-sample-macosx-$VERSION-universal.tgz"
     "go-auto-build-sample-linux-$VERSION-amd64.tgz"
@@ -13,7 +13,7 @@ LIST=(
 
 for filename in "${LIST[@]}"
 do
-    curl -fsSL -O \
+    curl -L -O \
         -H "Authorization: Bearer $GITHUB_TOKEN" \
         https://github.com/jht5945/go-auto-build-sample/releases/download/v"$VERSION"/"$filename"
     shasum -a 256 "$filename" >> SHASUMS256.txt
