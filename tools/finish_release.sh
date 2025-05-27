@@ -13,8 +13,11 @@ else
     -H "X-GitHub-Api-Version: 2022-11-28" \
     https://api.github.com/repos/jht5945/go-auto-build-sample/releases/tags/v"$VERSION" | jq '.["id"]')
 
-  DATA='{"draft":false,"prerelease":false,"make_latest":true}'
-
+  if [[ "$VERSION" == *"-preview"* ]]; then
+    DATA='{"draft":false,"prerelease":true,"make_latest":false}'
+  else
+    DATA='{"draft":false,"prerelease":false,"make_latest":true}'
+  fi
   curl -fsSL \
     -X PATCH \
     -H "Accept: application/vnd.github+json" \
